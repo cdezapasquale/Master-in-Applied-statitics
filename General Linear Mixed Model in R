@@ -5,7 +5,7 @@ For each person it takes 5 measures of their blood glucose per day during 50 day
 Our dependant variable is how many days the blood glucose is high (per day measure, per person and treatment)
 
 Variables:
-Tratamiento is the treatment applied with two factor: A or B
+Progama.Alimentacion is the treatment applied with two factor: A or B
 GlucemiaAlta, days with blood glucose is higher than normal levels.
 glpersona, the person itself
 gltoma, index of the measure in the day. gltoma =1 means is the first measure with made in the day.
