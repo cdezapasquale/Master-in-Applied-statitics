@@ -1,1 +1,38 @@
+Problem:
+We have 10 person with 2 treatments
+Each person receive every treatment. 
+For each person it takes 5 measures of their blood glucose per day during 50 days.
+Our dependant variable is how many days the blood glucose is high (per day measure, per person and treatment)
 
+Variables:
+Tratamiento is the treatment applied with two factor: A or B
+GlucemiaAlta, days with blood glucose is higher than normal levels.
+glpersona, the person itself
+gltoma, index of the measure in the day. gltoma =1 means is the first measure with made in the day.
+
+R code: 
+# Read the data and save it "glucemia"
+glucemia<-read.table("GLUCEMIA.csv", header = T, sep=";")
+
+#Creating factor for each of the 5 measures that the study takes per day.
+gltoma<- gl(5, 1, labels=c("1","2","3","4","5") )
+
+# Creating factor for each person that is part of the study
+glpersona<- gl(10, 5, labels=c("1","2","3","4","5","6","7","8","9","10") )
+
+#Putting all together
+glucemia<-cbind(glucemia,gltoma, glpersona)
+
+# Resolving
+To model this problem, I ve decided to use a general linear mixed model with family binomial, logit link function
+
+Model: g(uijk)= αi + βj +  Zk * uk
+αi is the fixed effect of treatment i , βj is the fixed effect of measure j  y Zi * ui, is the random effect of person j. 
+
+Using glmer
+
+model <-glmer(cbind(GlucemiaAlta,Total-GlucemiaAlta) ~ -1 + Programa.Alimentacion + gltoma  
+                +(1 | glpersona), family = binomial, 
+                data=glucemia, nAGQ=1) 
+                
+   
