@@ -1,6 +1,6 @@
 Problem:
 We have 10 person with 2 treatments
-Each person receive every treatment. 
+Each person receives every treatment. 
 For each person it takes 5 measures of their blood glucose per day during 50 days.
 Our dependant variable is how many days the blood glucose is high (per day measure, per person and treatment)
 
