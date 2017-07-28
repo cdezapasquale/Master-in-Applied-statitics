@@ -81,3 +81,5 @@ Programa.Alimentacion  1 45.981  45.981  45.981
 gltoma                 4 40.203  10.051  10.051
                 
    
+Ideas:
+it is important to excel, that glmer has unstructured var-cov structure per default and that structure is used in this analysis.
