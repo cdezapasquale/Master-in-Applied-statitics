@@ -81,5 +81,6 @@ Programa.Alimentacion  1 45.981  45.981  45.981
 gltoma                 4 40.203  10.051  10.051
                 
    
-Ideas:
+Conclusion:
 it is important to excel, that glmer has unstructured var-cov structure per default and that structure was used in this analysis.
+We can see that is significant the treatment and the moment of the day that it takes the measure of blood glucouse.
