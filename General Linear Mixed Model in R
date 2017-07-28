@@ -26,13 +26,52 @@ glucemia<-cbind(glucemia,gltoma, glpersona)
 # Resolving
 To model this problem, I ve decided to use a general linear mixed model with family binomial, logit link function
 
-Model: g(uijk)= αi + βj +  Zk * uk
-αi is the fixed effect of treatment i , βj is the fixed effect of measure j  y Zi * ui, is the random effect of person j. 
+Model: g(uijk)= α + ti + βj + Zk * uk
+α is the intercept,  t the fixed effect of treatment i , βj is the fixed effect of measure j  y Zi * ui, is the random effect of person j. 
 
 Using glmer
 
 model <-glmer(cbind(GlucemiaAlta,Total-GlucemiaAlta) ~ -1 + Programa.Alimentacion + gltoma  
                 +(1 | glpersona), family = binomial, 
                 data=glucemia, nAGQ=1) 
+                
+summary(model)
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(GlucemiaAlta, Total - GlucemiaAlta) ~ +Programa.Alimentacion +  
+    gltoma + (1 | glpersona)
+   Data: glucemia
+
+     AIC      BIC   logLik deviance df.resid 
+   695.7    713.9   -340.8    681.7       93 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.3245 -1.1203 -0.0737  0.8306  4.2611 
+
+Random effects:
+ Groups    Name        Variance Std.Dev.
+ glpersona (Intercept) 0.2251   0.4744  
+Number of obs: 100, groups:  glpersona, 10
+
+Fixed effects:
+                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)            -1.11058    0.17187  -6.462 1.04e-10 ***
+Programa.AlimentacionB -0.46129    0.06690  -6.895 5.38e-12 ***
+gltoma2                 0.08392    0.10945   0.767    0.443    
+gltoma3                 0.07804    0.10952   0.713    0.476    
+gltoma4                 0.43150    0.10575   4.080 4.50e-05 ***
+gltoma5                 0.51143    0.10511   4.865 1.14e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) Prg.AB gltom2 gltom3 gltom4
+Prgrm.AlmnB -0.169                            
+gltoma2     -0.325 -0.002                     
+gltoma3     -0.325 -0.002  0.510              
+gltoma4     -0.336 -0.012  0.528  0.528       
+gltoma5     -0.337 -0.014  0.532  0.531  0.551
                 
    
