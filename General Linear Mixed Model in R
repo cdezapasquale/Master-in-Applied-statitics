@@ -73,5 +73,11 @@ gltoma2     -0.325 -0.002
 gltoma3     -0.325 -0.002  0.510              
 gltoma4     -0.336 -0.012  0.528  0.528       
 gltoma5     -0.337 -0.014  0.532  0.531  0.551
+
+> anova(model)
+Analysis of Variance Table
+                      Df Sum Sq Mean Sq F value
+Programa.Alimentacion  1 45.981  45.981  45.981
+gltoma                 4 40.203  10.051  10.051
                 
    
