@@ -1,0 +1,34 @@
+
+Using the aircraft data and sm package, we want to know if density function for different periods are the same 
+We do a permutation test to know this
+
+R code:
+
+#Load the library
+library(sm)
+
+#Load the data
+data("aircraft")
+
+#Coerce the period as factor
+aircraft$Period<-as.factor(aircraft$Period)
+
+# We replace span variable for its logaritm
+aircraft$Span<-log(aircraft$Span)
+
+#We plot density function for each period using cross validation
+# to get the optimus h we use plot confidence interval
+
+for (i in unique(aircraft$Period)) {   
+sm.density(aircraft[aircraft$Period==i, ]$Span,display="se", method="cv", xlab=paste0("Log span para el periodo ", i))
+}
+
+#We compare period 1 vs period 2 using permutation test
+sm.density.compare(aircraft[aircraft$Period!=3, ]$Span, group=aircraft[aircraft$Period!=3,  ]$Period ,model="equal", method="cv", xlab="Span ", nboot=1000)
+
+#We compare period 3 vs period 3 using permutation test
+sm.density.compare(aircraft[aircraft$Period!=1, ]$Span, group=aircraft[aircraft$Period!=1, ]$Period , model="equal", method="cv", xlab="Span ", nboot=1000)
+
+#Conclusion, we reject our null hypothesis
+
+
