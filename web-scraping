@@ -1,0 +1,66 @@
+#The idea of my thesis is to text generation based on audio files. The first idea was to use midi files (now i will use mp3 files). 
+#To gather midi from website, the next code was created
+
+#We load the libraries
+
+library(rvest)
+library(httr)
+library(dplyr)
+library(stringi)
+library(tokenizers)
+
+#We create a vector of diferentes generes
+genre=c("pop","rock","rap","dance","punk","blues","country","movie","jazz","hip-hop")
+
+
+songs=c()
+
+# We create a function where
+scrape_midi=function(genre) { 
+for ( p in 1:200) { 
+
+#use the genre to build the entire website, p is page of midi of a given genre  
+URL=paste0("http://www.midiworld.com/search/",p,"/?q=",genre[i])
+
+
+
+#We read the website amd we extrac text, to avoid doing much request to the server
+we=read_html(URL) %>% html_node('#page') %>% html_text()
+
+#We extract the download link
+wor=tokenize_lines(we)
+wor=as.data.frame(wor[[1]]);names(wor)=c("list")
+
+        if (grepl("found nothing!",wor$list)[2]==TRUE) { next  }
+        else { 
+
+                                          ind=grep("- download",wor$list)
+                                          wor=wor[ind,]
+                                          
+                                          
+                                          wor_=gsub("- download","",wor)
+                                          songs=rbind(songs,wor_)
+                                                                      
+              #Then, our function download each midi file
+                for (j in 1:length(wor_)) {
+
+                  we=read_html(URL) %>% html_node(xpath =paste0( '//*[@id="page"]/ul[1]/li[',j,']/a')) %>% html_attr("href") 
+                  
+                  destfile <- paste0(getwd(),"/midi/",wor_[j],".mid")
+                  
+                  try(download.file(we, destfile,method="curl",quiet=T))
+                  print(j)
+                }}
+a<<-j
+b<<-p
+}}
+                  
+#We repeat this formula for each genre                  
+for (i in 1:length( genre)) { 
+  gen=genre[i]
+  scrape_midi(gen)
+  print(i)
+    }            
+    
+    
+#Of course, this code can be improved and when i ve coded, i did not realize about some ideas to avoid being banned (i was not bannet but it could have happened)
