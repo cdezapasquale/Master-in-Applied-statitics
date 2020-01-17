@@ -9,7 +9,7 @@ library(dplyr)
 library(stringi)
 library(tokenizers)
 
-#We create a vector of diferentes generes
+#We create a vector of diferentes genres
 genre=c("pop","rock","rap","dance","punk","blues","country","movie","jazz","hip-hop")
 
 
@@ -63,4 +63,4 @@ for (i in 1:length( genre)) {
     }            
     
     
-#Of course, this code can be improved and when i ve coded, i did not realize about some ideas to avoid being banned (i was not bannet but it could have happened)
+#Of course, this code can be improved and when i ve coded, i did not realize about some ideas to avoid being banned (i was not banned but it could have happened)
