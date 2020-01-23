@@ -2,7 +2,7 @@
 #Using the aircraft data and sm package, we want to know if density function for different periods are the same 
 #We do a permutation test to know this
 
-R code:
+#R code:
 
 #Load the library
 library(sm)
